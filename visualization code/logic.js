@@ -76,7 +76,7 @@ legend.onAdd = function () {
 legend.addTo(map);
 
 // Fetch Bigfoot data
-fetch('../data/bigfoot_coordinates_clean_cols2.json')
+fetch('../data/bigfoot_coordinates_clean_cols.json')
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -86,7 +86,7 @@ fetch('../data/bigfoot_coordinates_clean_cols2.json')
             let reportClass = report.report_class;  
             let reportNumber = report.report_number;  
             let county = report.county;
-            // let year = report.year;
+            let year = report.year;
             let latitude = report.latitude;
             let longitude = report.longitude;
 
@@ -107,6 +107,7 @@ fetch('../data/bigfoot_coordinates_clean_cols2.json')
                     Report Number: ${reportNumber}<br>
                     Location: ${county}<br>
                     Report Class: ${reportClass}<br>
+                    Year: ${year}</br>
                     Link: <a href="https://bfro.net/GDB/show_report.asp?id=${reportNumber}" target="_blank">View Report</a> 
                 `);
             
