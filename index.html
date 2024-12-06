@@ -4,15 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bigfoot Sightings in North America</title>
-    <link rel="stylesheet" href="visualization code/style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <!-- Marker cluster JavaScript code -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Marker cluster CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+
+    <!-- Icons -->
+    <script src="visualization code/leaflet.extra-markers.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="visualization code/css/leaflet.extra-markers.min.css">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="visualization code/css/style.css">
+
+
 </head>
 <body>
     <h1>Bigfoot Sightings Visualization</h1>
+    
+    <!-- Our Map -->
     <div id="map" style="width: 100%; height: 500px;"></div>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+    <!-- Our JavaScript -->
     <script src="visualization code/logic.js"></script>
-    <h2>Is it pretty? No.</h2>
-    <h3>But it's a heck of a proof of concept.</h3>
+
+    <h2></h2>
+    <h3></h3>
 </body>
 </html>
