@@ -46,31 +46,39 @@ let icons = {
 
 // Function to create a legend for the map
 function createLegend() {
-  return L.control({ position: 'topright' });  // Set legend to top-right position
-}
-
-const legend = createLegend();
-
-// Add the legend to the map
-legend.onAdd = function () {
-    const div = L.DomUtil.create('div', 'info legend');
-    const classes = ['Class A', 'Class B', 'Class C'];  // Class names in the order they will appear
-    const colors = ['green', 'orange', 'red'];  // Corresponding colors for each class
-
-    // Loop through each class and add a colored box and label to the legend
-    for (let i = 0; i < classes.length; i++) {
-        div.innerHTML += `
-            <div style="display: flex; align-items: center;">
-                <svg width="20" height="20" viewBox="0 0 20 20" style="margin-right: 5px;">
-                    <circle cx="10" cy="10" r="8" fill="${colors[i]}" fill-opacity="0.5"></circle>
-                </svg>
-                <span>${classes[i]}</span>
-            </div>
-        `;
-    }
-    
-    return div;
-};
+    return L.control({ position: 'topright' });  // Set legend to top-right position
+  }
+  
+  const legend = createLegend();  // You were missing this line to initialize the legend
+  
+  // Add the legend to the map
+  legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'info legend');
+      
+      // Set a white background with padding for the legend
+      div.style.backgroundColor = 'white'; // White background
+      div.style.padding = '10px';           // Padding around the legend
+      div.style.borderRadius = '5px';       // Optional: Rounded corners for the rectangle
+      div.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)'; // Optional: Shadow for better visibility
+  
+      const classes = ['Class A', 'Class B', 'Class C'];  // Class names in the order they will appear
+      const colors = ['green', 'orange', 'red'];  // Corresponding colors for each class
+  
+      // Loop through each class and add a colored box and label to the legend
+      for (let i = 0; i < classes.length; i++) {
+          div.innerHTML += `
+              <div style="display: flex; align-items: center;">
+                  <svg width="20" height="20" viewBox="0 0 20 20" style="margin-right: 5px;">
+                      <circle cx="10" cy="10" r="8" fill="${colors[i]}" fill-opacity="0.5"></circle>
+                  </svg>
+                  <span>${classes[i]}</span>
+              </div>
+          `;
+      }
+      
+      return div;
+  };
+  
 
 // Add the legend to the map
 legend.addTo(map);
