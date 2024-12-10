@@ -1,19 +1,80 @@
 # Air B&Bigfoot
 
-This project utalizes the longest running Bigfoot sighting database to create an interactive map of American sightings.
+This project utilizes the longest-running Bigfoot sighting database to create an interactive map of American sightings.
 
-**Link to project**: [Where's Bigfoot been?](https://the-eva-a.github.io/bigfoot-sightings/)
+**Link to project**: [Where's Bigfoot Been?](https://the-eva-a.github.io/bigfoot-sightings/)
+
+## Overview
+
+Air B&Bigfoot combines reports from the oldest and only scientific Bigfoot research group with advanced data scraping, cleaning, and visualization techniques. This project showcases an organized dataset, a Flask API for serving the data, and an interactive JavaScript map that brings the legend of Bigfoot to life.
 
 ## What We've Made
-**Tech Used:** Python, Javascript
-**Libraries Used**:
+**Tech Used:**
+- **Languages:** Python, JavaScript  
+- **Libraries:** Pandas, Beautiful Soup, Flask, Leaflet.js  
 
-[Pitch the product here]
+**Features:**
+- **Interactive Map:** Explore Bigfoot sightings with filters for year and classification.  
+- **Data Transparency:** All report data is linked directly to the [Bigfoot Research Organization (BFRO)](https://www.bfro.net).  
+- **Dynamic Details:** Clickable markers reveal the report number, classification, location, year, and a link to the original report.
+- **Powerful API:** The included Flask API enables programmatic access to the dataset, allowing users to:
+  - Retrieve all records or a subset of records based on parameters such as year, state, or classification.
+  - Access detailed metadata for individual reports.
+  - Integrate Bigfoot sightings data into their own projects or analysis pipelines.
+This project invites users to dive into the history and mystery of Bigfoot sightings, presenting data in an accessible and engaging way.
 
-[Go over Features]
-- Large database the Bigfoot Research Organization[BFRO](https://www.bfro.net) dates back to [1955](https://www.bfro.net/gdb/classify.asp) and has over five tousand entries giving a rich dataset to look through. 
-- Location is based on report details or data extracted from the overall report
-- 
+This project invites users to dive into the history and mystery of Bigfoot sightings, presenting data in an accessible and engaging way.
+Features
+
+- **Extensive Database:** The [Bigfoot Research Organization (BFRO)](https://www.bfro.net/) has been compiling reports since [1955](https://www.bfro.net/gdb/classify.asp), resulting in a dataset with over 5,000 detailed entries. This rich collection provides ample opportunities for exploration and analysis.
+
+- **Interactive Visualization**: The project transforms this extensive database into an intuitive map, where users can filter sightings by year or classification and access detailed information about each report.
+
+- **Direct Data Access:** Every map marker links back to the original BFRO report, allowing users to delve deeper into the specifics of individual sightings.
+## How To Use 
+### Interactive Map
+1. **Access the Map:** 
+
+    Visit the interactive map at [Where's Bigfoot Been?](https://the-eva-a.github.io/bigfoot-sightings/).
+
+2. **Explore Sightings:** 
+    - Use the zoom and pan features to navigate the map.
+    - Click on any mark to see details about a specific Bigfoot sighting, including:
+        - Report number
+        - Report classification (e.g., Class A, B, or C)
+        - Year of the sighting
+        - Location details
+        - A link to the original BFRO report
+3. **Filter Sightings:** 
+    - Use the filter options to narrow sightings by year or classification. 
+    - Clear filters to return to the full dataset
+---
+### API Access
+To access the data programmatically, follow these steps:
+1. **Run the API Locally:** 
+    ``` bash
+    git clone https://github.com/the-eva-a/bigfoot-sightings.git
+    cd bigfoot-sightings
+    ```
+
+2. **Install Dependencies:**
+
+    Ensure you have Python installed. Then, install the required Python packages:
+
+    ```
+    pip install -r requirements.txt
+    ```
+3. **Run the Flask API:**
+    
+    Start the API locally:
+    ```
+    flask_app/main.py
+    ```
+    The API will run at `http://127.0.0.1:5000/`
+
+For more information on the Flask API go [API README](flask_app/README.md)
+---
+
 ## How We Did It
 ### Data Retrieval 
 Our journey began at the global Bigfoot database, which conveniently provided links to every state page. From there, we scraped each state page to gather all county links, and finally, we visited each county page to retrieve detailed report data.
@@ -26,16 +87,45 @@ Data Preparation
 
 To prepare the data for analysis, we started by loading the raw_scraping_data.json file into a pandas DataFrame. We made several adjustments to ensure consistency and usability:
 
-    Column Standardization: All column names were converted to lowercase and formatted with underscores for consistency and ease of use.
-    Date Cleaning: Rows with vague or missing date entries (e.g., "late 90s" or NaN) were dropped, and a cleaned date_cleaned column was created for valid four-digit year entries.
-    Text and Field Normalization: Fields like report_number and report_class were transformed to extract consistent values, while columns like environment were standardized to lowercase for uniformity.
+- **Column Standardization:** 
+All column names were converted to lowercase and formatted with underscores for consistency and ease of use.
+- **Date Cleaning:**
+Rows with vague or missing date entries (e.g., "late 90s" or NaN) were dropped, and a cleaned date_cleaned column was created for valid four-digit year entries.
+- **Text and Field Normalization:** Fields like report_number and report_class were transformed to extract consistent values, while columns like environment were standardized to lowercase for uniformity.
 
 Thanks to the meticulous structure of the Bigfoot database, no major outliers or invalid entries were present, and all rows included the required fields: year, state, county, and report number. This streamlined the cleaning process, allowing us to focus on deeper analysis and enrichment in subsequent steps.
 ## Lessons Learned
 This project reinforced several key lessons about data collection and analysis:  
 - **The Value of Quality Data**: The Bigfoot database was well-maintained, which minimized the effort needed for cleaning and allowed us to focus on analysis.  
-- **The Power of Automation**: Automating our scraping process with logging ensured efficiency and provided clear progress tracking.  
-- **The Importance of Consistency**: Consistent formatting in the dataset (e.g., standardized `div` tags) demonstrated how clear data structure reduces preprocessing effort.  
-- **Handling Missing Information**: Deciding to drop vague date entries while keeping placeholders for other missing values helped maintain data integrity without compromising analysis.  
+- **The Power of Automation**: Automating our scraping process with logging ensured efficiency and provided clear progress tracking.
+- **Building an Intuitive API:** Developing the Flask API highlighted the importance of clean and consistent endpoints. By structuring our API to allow for filtering by year, state, and report details, we made the dataset more accessible to users and other applications.
+-** Interactive Visualizations Matter:** Creating the JavaScript map with Leaflet.js underscored the importance of user experience. Features like clickable markers, filtering options, and integration with the BFRO database provided an engaging way for users to explore sightings.  
+- **The Importance of Consistency**: Standardizing data formats and ensuring uniformity across all processes—whether in Python scripts, the Flask API, or JavaScript code—reduced errors and streamlined the workflow.
+- **Handling Missing and Ambiguous Information:** While some reports lacked precise details (e.g., vague date entries or ambiguous locations), we ensured that critical fields like year, state, and county were preserved. Placeholder values allowed us to maintain the dataset's integrity without compromising functionality.
+### Ethics
 
-## Acknowledgements
+Working with the Bigfoot dataset presented unique challenges and opportunities, especially given the cultural and folkloric nature of the subject. Our team approached this project with respect for the data, the contributors, and the Bigfoot community. Below, we detail the steps taken to ensure ethical handling of the dataset:
+
+1. **Source Credibility:**
+
+    The dataset is based on reports of an unproven creature, which inherently presents challenges in reliability. We chose the Bigfoot Research Organization (BFRO) as our data source because it is a longstanding and reputable organization in this space. The BFRO has a history of consistent record-keeping and well-described standards for classification and reporting, which provided a strong foundation for our project.
+
+2. **Respect for the Community:**
+    While none of our team members identify as Bigfoot believers, we wanted to ensure that our project did not mock or dismiss the experiences of those who do. We made a conscious effort to present the data in a neutral, factual manner, avoiding exaggerations or dismissive language. Our goal was to remain open-minded and to treat the subject with curiosity and respect.
+
+3. **Data Privacy and Geolocation:**
+    The BFRO is careful to handle identifiable details in accordance with the wishes of those who submit reports. Our project relied entirely on the data as published by the BFRO, and we made no additional effort to collect or reveal personal information. Furthermore, the dataset does not include precise geolocation data but instead relies on generalized location descriptors (e.g., county or nearest town). As such, there are no concerns about exposing sensitive or private information.
+
+4. **Data Integrity:**
+    We performed minimal changes to the data, restricting our modifications to standard cleaning processes, such as standardizing column names, correcting vague dates, and removing incomplete entries. All reports were pulled directly from the BFRO website, and the data remains true to its original format. However, we acknowledge the inherent limitations of the dataset—such as subjective classifications and incomplete reports—and have noted these limitations in our documentation.
+
+5. **Attribution and Collaboration:**
+    We have properly attributed the BFRO as the source of the data and have also informed the organization about our project. The BFRO imposes no restrictions on the use of their data, allowing us to build and share our project freely while maintaining transparency about its origins.
+
+Through these considerations, we have aimed to balance scientific curiosity, cultural sensitivity, and ethical responsibility. Our project not only highlights the intriguing history of Bigfoot sightings but also serves as a reminder of the importance of respectful and thoughtful engagement with any dataset.
+
+## Contributors
+- Eva Anderson [github](https://github.com/the-eva-a)
+- Kelsie Bumadianne [github](https://github.com/kbumadianne)
+- Heather Eby [github](https://github.com/ebyheather)
+- Abigail Husain [github](https://github.com/ahusain718)
