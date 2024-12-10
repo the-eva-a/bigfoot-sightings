@@ -5,38 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bigfoot Sightings in North America</title>
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
+
+    <!-- Marker Cluster CSS -->
+    <link rel="stylesheet" href="./visualization code/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+</head>
+<body>
+    <header>
+        <h1>Bigfoot Sightings Visualization</h1>
+    </header>
+
+    <nav>
+        <a href="./index.html" id="map-tab">Map</a>
+        <a href="./dashboard.html" id="dashboard-tab">Dashboard</a>
+        <a href="https://www.bfro.net" target="_blank">BFRO</a>
+    </nav>
     
-    <!-- Leaflet JavaScript code -->
+
+    <div class="container">
+        <h2>Interactive Map</h2>
+        <p>Explore Bigfoot sightings across North America.</p>
+        <div id="map" style="width: 100%; height: 500px;"></div>
+    </div>
+
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
-    <!-- Marker cluster JavaScript code -->
-    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <!-- Marker Cluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
 
-    <!-- Marker cluster CSS -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+    <!-- Custom Map Logic -->
+    <script src="./visualization code/logic.js"></script>
 
-    <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="visualization code/css/style.css">
+    <script>
+        // Highlight the current tab based on the URL
+        const currentURL = window.location.pathname;
+        if (currentURL.endsWith("index.html") || currentURL === "/") {
+            document.getElementById("map-tab").classList.add("selected");
+        } else if (currentURL.endsWith("dashboard.html")) {
+            document.getElementById("dashboard-tab").classList.add("selected");
+        }
+    </script>    
 
+<div class="container">
+    <h2>BFRO Report Classification System</h2>
+    <p>
+        All reports posted into the BFRO's online database are assigned a classification: Class A, Class B, or Class C.
+        The classifications relate to the potential for misinterpretation of what was observed or heard.
+    </p>
+    <h3>Class A</h3>
+    <p>
+        Reports involve clear sightings where misidentification of other animals can be ruled out with confidence.
+    </p>
+    <h3>Class B</h3>
+    <p>
+        Incidents involve observations in poor conditions or distinct sounds associated with sasquatches. These reports lack clear visuals but are still credible.
+    </p>
+    <h3>Class C</h3>
+    <p>
+        Second or third-hand reports with higher potential for inaccuracy. These are usually archived and rarely displayed publicly.
+    </p>
+</div>
 
-</head>
-<body>
-    <h1>Bigfoot Sightings Visualization</h1>
-    
-    <!-- Our Map -->
-    <div id="map" style="width: 100%; height: 500px;"></div>
-
-    <!-- Our JavaScript -->
-    <script src="visualization code/logic.js"></script>
-
-    <h2></h2>
-    <h3></h3>
+<footer>
+    <p>Explore our resources and dive into the mysteries of Bigfoot sightings.</p>
+</footer>
 </body>
 </html>
