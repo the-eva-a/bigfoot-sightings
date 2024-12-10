@@ -85,7 +85,7 @@ legend.addTo(map);
 
 // Fetch Bigfoot data
 
-fetch('https://raw.githubusercontent.com/the-eva-a/bigfoot-sightings/main/data/bigfoot_coordinates_clean_cols.json')
+fetch('data/bigfoot_coordinates_clean_cols.json')
     .then(response => response.json())
     .then(data => {
       console.log(data)
