@@ -3,59 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bigfoot Sightings Map</title>
+    <title>Bigfoot Sightings API</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Raleway:wght@400;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f5f7e6;
+            color: #2f4f4f;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #343a40;
         }
         header {
-            background-color: #343a40;
-            color: #ffffff;
-            padding: 1rem;
+            background: #557c55;
+            color: #f5f7e6;
+            padding: 1.5rem 0;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        main {
-            padding: 2rem;
+        header h1 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
         }
-        footer {
-            background-color: #343a40;
-            color: #ffffff;
-            text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #2f4f4f;
+            font-family: 'Raleway', sans-serif;
+        }
+        table {
             width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+        }
+        th {
+            background: #88b04b;
+            color: #f5f7e6;
         }
         a {
-            color: #007bff;
+            color: #88b04b;
             text-decoration: none;
+            font-weight: bold;
         }
         a:hover {
             text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #557c55;
+        }
+        code {
+            display: block;
+            background: #f7f9f7;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: 1px solid #e0e4e0;
+            font-family: monospace;
+        }
+        .example {
+            background: #eef5e1;
+            border-left: 5px solid #88b04b;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bigfoot Sightings Interactive Map</h1>
+        <h1>Bigfoot Sightings API</h1>
+        <p>Explore the wonders of Bigfoot sightings across the USA!</p>
     </header>
-    <main>
-        <h2>Welcome!</h2>
-        <p>Explore Bigfoot sightings across the United States. Use the following features:</p>
-        <ul>
-            <li><strong>Search Reports:</strong> View detailed information about specific reports by their number.</li>
-            <li><strong>Find Nearby:</strong> Discover sightings near a specific location.</li>
-            <li><strong>State Summaries:</strong> Learn about sightings and trends in each state.</li>
-            <li><strong>Submitter Stats:</strong> Analyze data about the people reporting sightings.</li>
-        </ul>
-        <p>Use the navigation above to access these tools and more.</p>
-    </main>
+    <div class="container">
+        <h2>About the API</h2>
+        <p>
+            The Bigfoot Sightings API provides detailed information about reported Bigfoot sightings. 
+            Search by location, time period, keywords, and proximity to specific areas.
+        </p>
+        <h2>Available Endpoints</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/</code></td>
+                    <td>Homepage with information about the API.</td>
+                </tr>
+                <tr>
+                    <td><code>/info/&lt;int:report_number&gt;</code></td>
+                    <td>Retrieve detailed information about a specific report.</td>
+                </tr>
+                <tr>
+                    <td><code>/state-reports?state=&lt;state_name&gt;</code></td>
+                    <td>Get all reports for a specific state (case-insensitive).</td>
+                </tr>
+                <tr>
+                    <td><code>/county-reports?county=&lt;county_name&gt;&state=&lt;state_name&gt;</code></td>
+                    <td>Retrieve all reports from a specific county, with an optional state filter.</td>
+                </tr>
+                <tr>
+                    <td><code>/nearby-sightings?location=&lt;location&gt;&radius=&lt;radius&gt;</code></td>
+                    <td>Find sightings within a specific radius of a location.</td>
+                </tr>
+                <tr>
+                    <td><code>/time-period-search?start_year=&lt;year&gt;&end_year=&lt;year&gt;</code></td>
+                    <td>Search sightings by date range, with optional state or county filters.</td>
+                </tr>
+                <tr>
+                    <td><code>/word-search?keyword=&lt;keyword&gt;</code></td>
+                    <td>Search for sightings containing specific keywords in their descriptions.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Example Usage</h2>
+        <div class="example">
+            <p>To search for sightings in Washington State, try:</p>
+            <code>http://127.0.0.1:5000/state-reports?state=Washington</code>
+        </div>
+        <h2>Source Code</h2>
+        <p>
+            This project is open source! Check out the code on 
+            <a href="https://github.com/your-repo" target="_blank">GitHub</a>.
+        </p>
+    </div>
     <footer>
-        <p>&copy; 2024 Bigfoot Sightings Team. All rights reserved.</p>
+        &copy; 2024 Bigfoot Sightings API. Nature-inspired for Bigfoot enthusiasts!
     </footer>
 </body>
 </html>
