@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bigfoot Sightings in North America</title>
-    <link rel="stylesheet" href="visualization code/style.css">
+    <title>Bigfoot Report Density Choropleth Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; }
+    </style>
 </head>
 <body>
-    <h1>Bigfoot Sightings Visualization</h1>
-    <div id="map" style="width: 100%; height: 500px;"></div>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-    <script src="visualization code/logic.js"></script>
-    <h2>Is it pretty? No.</h2>
-    <h3>But it's a heck of a proof of concept.</h3>
+
+    <h1>Bigfoot Report Density by State</h1>
+    <div id="map"></div>
+
+    <!-- Link to the JavaScript file -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="visualization code/logic.js"></script>  <!-- External JavaScript file -->
+
 </body>
 </html>
