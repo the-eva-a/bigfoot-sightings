@@ -84,7 +84,7 @@ function createLegend() {
 legend.addTo(map);
 
 // Fetch Bigfoot data
-fetch('../data/bigfoot_coordinates_clean_cols.json')
+fetch('./data/bigfoot_coordinates_clean_cols.json')
     .then(response => response.json())
     .then(data => {
       console.log(data)
