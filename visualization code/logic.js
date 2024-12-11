@@ -3,8 +3,11 @@ const map = L.map('map').setView([39.8283, -98.5795], 4); // Center of the US
 
 // Create base layers for the map
 let baseLayers = {
-  "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  "OpenStreetMap": L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&hl={language}', {
+    attribution: 'Map data &copy;2024 Google',
+    subdomains: '0123',
+    maxZoom: 22,
+    language: 'en'
   }),
   "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.opentopomap.org/copyright">OpenTopoMap</a> contributors',
