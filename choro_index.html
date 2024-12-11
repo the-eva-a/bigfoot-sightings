@@ -9,8 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Choropleth Map</h1>
-        <p>Bigfoot Report Density by State.</p>
+        <h1>Bigfoot Sightings Visualization</h1>
     </header>
 
     <nav>
@@ -20,7 +19,35 @@
         <a href="https://www.bfro.net" target="_blank">BFRO</a>
     </nav>
 
-    <!-- Add your choropleth map logic JavaScript file -->
+    <div class="container">
+        <h2>Choropleth Map</h2>
+        <p>Bigfoot Report Density by State</p>
+        <div id="map" style="width: 100%; height: 500px;"></div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+    crossorigin="anonymous"></script>
+
+    <!-- Custom Map Logic -->
     <script src="./visualization code/choro_layer_logic.js"></script>
+
+    <script>
+        // Highlight the current tab based on the URL
+        const currentURL = window.location.pathname;
+        if (currentURL.endsWith("index.html") || currentURL === "/") {
+            document.getElementById("map-tab").classList.add("selected");
+        } else if (currentURL.endsWith("dashboard.html")) {
+            document.getElementById("dashboard-tab").classList.add("selected");
+        } else if (currentURL.endsWith("choro_index.html")) {
+            document.getElementById("choro-tab").classList.add("selected");
+        }
+    </script> 
+
+    <footer>
+        <p>Explore our resources and dive into the mysteries of Bigfoot sightings.</p>
+    </footer>
 </body>
 </html>
+
