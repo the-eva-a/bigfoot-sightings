@@ -43,6 +43,8 @@
     <script>
         // Highlight the current tab based on the URL
         const currentURL = window.location.pathname;
+    
+        // Check for the root path (i.e., the main page of your website)
         if (currentURL.endsWith("index.html") || currentURL === "/") {
             document.getElementById("map-tab").classList.add("selected");
         } else if (currentURL.endsWith("dashboard.html")) {
