@@ -34,8 +34,16 @@
     <div class="container">
         <h2>Interactive Map</h2>
         <p>Explore Bigfoot sightings across North America.</p>
-        <div id="map" style="width: 100%; height: 500px;"></div>
+        <!-- Dropdown for Year Selection -->
+        <div id="dropdown-container" class="dropdown-container">
+        <label for="year-dropdown" class="dropdown-label">Select Year</label>
+            <select id="year-dropdown">
+                <option value="">Select Year</option>
+            </select>
+        </div>   
+        <div id="map" style="width: 100%; height: 500px;"></div>     
     </div>
+
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

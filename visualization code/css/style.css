@@ -103,3 +103,58 @@ nav a.selected {
     background: #2f4f4f; /* Highlight selected tab */
     color: #ffffff; /* Ensure text is readable on dark background */
 }
+
+
+/* Ensure the parent container allows the dropdown to align to the right */
+.container {
+    position: relative; /* Allow absolute positioning of the dropdown within this container */
+    padding: 20px; /* Optional: add padding for spacing */
+  }
+  
+  /* Style the dropdown container */
+  .dropdown-container {
+    position: absolute; /* Use absolute positioning to place it at the top-right corner */
+    top: 53px;          /* Space from the top */
+    right: 10px;        /* Space from the right side */
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for better visibility */
+  }
+  
+  /* Style the label for the dropdown */
+  .dropdown-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;  /* Block display so it stays above the dropdown */
+  }
+  
+  /* Style the dropdown select element */
+  #year-dropdown {
+    width: 150px;      /* Width of the dropdown */
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+/* Style the dropdown container
+.dropdown-container {
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .dropdown-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  #year-dropdown {
+    width: 150px;
+    padding: 5px;
+    font-size: 14px;
+  } */
+  
