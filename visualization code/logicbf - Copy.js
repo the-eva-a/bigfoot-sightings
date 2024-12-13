@@ -19,18 +19,18 @@ let baseLayers = {
 // Add the default map (StreetMap) to the map
 baseLayers["StreetMap"].addTo(map);
 
-// Create a new marker cluster group for clustering markers
-let markerClusters = L.markerClusterGroup();
-
 // Initialize LayerGroups for each class
-let classClusters = {
-  classA: L.markerClusterGroup(),
-  classB: L.markerClusterGroup(),
-  classC: L.markerClusterGroup()
+let classLayers = {
+  classA: new L.LayerGroup(),
+  classB: new L.LayerGroup(),
+  classC: new L.LayerGroup()
 };
 
-// Add the base layers and class layers to the map
-L.control.layers(baseLayers, classClusters).addTo(map);
+// Add layer control to switch between layers
+L.control.layers(baseLayers, classLayers).addTo(map);
+
+// Create a new marker cluster group for clustering markers
+let markerClusters = L.markerClusterGroup();
 
 // Function to create the SVG icon with an oval background color and PNG image of Bigfoot!
 function createSvgIconWithImage(color) {
@@ -53,48 +53,43 @@ let icons = {
   classC: createSvgIconWithImage("red")
 };
 
-// Function to create a legend for the map
-function createLegend() {
-  return L.control({ position: 'topright' });  // Set legend to top-right position
-}
-
-const legend = createLegend();  // You were missing this line to initialize the legend
-
-// Add the legend to the map
-legend.onAdd = function () {
-    const div = L.DomUtil.create('div', 'info legend');
-    
-    // Set a white background with padding for the legend
-    div.style.backgroundColor = 'white'; // White background
-    div.style.padding = '10px';           // Padding around the legend
-    div.style.borderRadius = '5px';       // Optional: Rounded corners for the rectangle
-    div.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)'; // Optional: Shadow for better visibility
-
-    const classes = ['Class A', 'Class B', 'Class C'];  // Class names in the order they will appear
-    const colors = ['green', 'orange', 'red'];  // Corresponding colors for each class
-
-    // Loop through each class and add a colored box and label to the legend
-    for (let i = 0; i < classes.length; i++) {
-        div.innerHTML += `
-            <div style="display: flex; align-items: center;">
-                <svg width="20" height="20" viewBox="0 0 20 20" style="margin-right: 5px;">
-                    <circle cx="10" cy="10" r="8" fill="${colors[i]}" fill-opacity="0.5"></circle>
-                </svg>
-                <span>${classes[i]}</span>
-            </div>
-        `;
-    }
-    
-    return div;
-};
-
-// Add the legend to the map
-legend.addTo(map);
-
 // Initialize the yearsAvailable set to hold unique years for the year dropdown filter
 let yearsAvailable = new Set();
 
-// Fetch Bigfoot data from a local JSON file
+// Define a custom control for Leaflet, extending L.Control to create a combined filter control
+const combinedControl = L.Control.extend({
+  onAdd: function () {
+    const div = L.DomUtil.create('div', 'combined-controls');
+    div.style.backgroundColor = 'white';
+    div.style.padding = '10px';
+    div.style.borderRadius = '5px';
+    div.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+    div.style.marginBottom = '10px';
+
+    const yearSelect = document.createElement('select');
+    yearSelect.innerHTML = `
+      <option value="">Select Year</option>
+      ${Array.from(yearsAvailable)
+        .map(year => `<option value="${year}">${year}</option>`)
+        .join('')}
+    `;
+    div.appendChild(yearSelect);
+
+    const classFiltersDiv = document.createElement('div');
+    classFiltersDiv.innerHTML = `
+      <label><input type="checkbox" checked data-class="classA"><span style="color:green;">&#11044;</span> Class A</label><br>
+      <label><input type="checkbox" checked data-class="classB"><span style="color:orange;">&#11044;</span> Class B</label><br>
+      <label><input type="checkbox" checked data-class="classC"><span style="color:red;">&#11044;</span> Class C</label>
+    `;
+    div.appendChild(classFiltersDiv);
+
+    return div;
+  }
+});
+
+map.addControl(new combinedControl({ position: 'topright' }));
+
+// Fetch Bigfoot data from a local JSON file containing coordinates and other details
 fetch('../data/bigfoot_coordinates_clean_cols.json')
   .then(response => response.json())
   .then(data => {
@@ -109,20 +104,20 @@ fetch('../data/bigfoot_coordinates_clean_cols.json')
       let latitude = report.latitude;
       let longitude = report.longitude;
 
-      if (latitude && longitude) {
-        let markerIcon = icons.classC;  // Default to Class C icon
-        if (reportClass === "A") {
-          markerIcon = icons.classA;  // Use Class A icon if the class is A
-        } else if (reportClass === "B") {
-          markerIcon = icons.classB;  // Use Class B icon if the class is B
-        }
+      // Assign the appropriate marker icon based on the report class
+      let markerIcon = icons.classC;  // Default to Class C icon
+      if (reportClass === "A") {
+        markerIcon = icons.classA;  // Use Class A icon if the class is A
+      } else if (reportClass === "B") {
+        markerIcon = icons.classB;  // Use Class B icon if the class is B
+      }
 
-        // Create a new marker with the appropriate icon and bind a popup with the report details
-        const marker = L.marker([latitude, longitude], {
-          icon: markerIcon,
-          year: year, // Store year directly in the marker options
-          reportClass: reportClass // Store reportClass directly in the marker options
-        })
+      // Create a new marker with the appropriate icon and bind a popup with the report details
+      const marker = L.marker([latitude, longitude], {
+        icon: markerIcon,
+        year: year, // Store year directly in the marker options
+        reportClass: reportClass // Store reportClass directly in the marker options
+      })
         .bindPopup(`
           <b>Bigfoot Sighting Report</b><br>
           Report Number: ${reportNumber}<br>
@@ -132,18 +127,17 @@ fetch('../data/bigfoot_coordinates_clean_cols.json')
           Link: <a href="https://bfro.net/GDB/show_report.asp?id=${reportNumber}" target="_blank">View Report</a>
         `);
 
-        // Add the marker to the appropriate class layer
-        if (reportClass === "A") {
-          classClusters.classA.addLayer(marker);
-        } else if (reportClass === "B") {
-          classClusters.classB.addLayer(marker);
-        } else if (reportClass === "C") {
-          classClusters.classC.addLayer(marker);
-        }
-
-        // Add the marker to the cluster group (this ensures clustering)
-        markerClusters.addLayer(marker);
+      // Add the marker to the appropriate class layer
+      if (reportClass === "A") {
+        classLayers.classA.addLayer(marker);
+      } else if (reportClass === "B") {
+        classLayers.classB.addLayer(marker);
+      } else if (reportClass === "C") {
+        classLayers.classC.addLayer(marker);
       }
+
+      // Add marker to the cluster group (this ensures clustering)
+      markerClusters.addLayer(marker);
 
       // Add the year to the yearsAvailable set (this will be used for filtering by year)
       if (year) {
@@ -152,9 +146,7 @@ fetch('../data/bigfoot_coordinates_clean_cols.json')
     });
 
     // Add the markerClusters to the map
-    map.addLayer(classClusters.classA);
-    map.addLayer(classClusters.classB);
-    map.addLayer(classClusters.classC);
+    map.addLayer(markerClusters);
 
     // Update the year dropdown
     const yearSelect = document.querySelector('select');
@@ -168,9 +160,9 @@ fetch('../data/bigfoot_coordinates_clean_cols.json')
       const selectedYear = this.value;
 
       // Clear all class layers and marker clusters
-      classClusters.classA.clearLayers();
-      classClusters.classB.clearLayers();
-      classClusters.classC.clearLayers();
+      classLayers.classA.clearLayers();
+      classLayers.classB.clearLayers();
+      classLayers.classC.clearLayers();
       markerClusters.clearLayers();
 
       // Add markers based on the selected year
@@ -195,21 +187,29 @@ fetch('../data/bigfoot_coordinates_clean_cols.json')
 
           // Add marker to the correct class layer
           if (reportClass === "A") {
-            classClusters.classA.addLayer(marker);
+            classLayers.classA.addLayer(marker);
           } else if (reportClass === "B") {
-            classClusters.classB.addLayer(marker);
+            classLayers.classB.addLayer(marker);
           } else if (reportClass === "C") {
-            classClusters.classC.addLayer(marker);
+            classLayers.classC.addLayer(marker);
           }
 
-          // Also add marker to the markerClusters for clustering
-          map.addLayer(classClusters.classA);
-          map.addLayer(classClusters.classB);
-          map.addLayer(classClusters.classC);
+          // Also add marker to the cluster layer
+          markerClusters.addLayer(marker);
         }
       });
 
       // Add the updated markerClusters to the map
       map.addLayer(markerClusters);
     });
+
+    // Create the overlay controls for the layers
+    let overlays = {
+      "Class A": classLayers.classA,
+      "Class B": classLayers.classB,
+      "Class C": classLayers.classC
+    };
+
+    // Add control for layers to the map
+    L.control.layers(null, overlays).addTo(map);
   });
