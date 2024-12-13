@@ -4,36 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bigfoot Sightings Visualization</title>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <!-- Custom CSS for the map container and style -->
     <link rel="stylesheet" href="./visualization code/css/style.css">
-    
-    <!-- Additional styling to make sure the map stays in its container -->
-    <style>
-        /* Ensure body and html elements take full height */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* The container should also fill the available space */
-        .container {
-            height: 100%;
-            padding: 20px;
-        }
-
-        /* Ensure the map container stays within its parent */
-        #map {
-            width: 100%; /* Full width */
-            height: 500px; /* Fixed height */
-        }
-
-        /* Example of the selected class for highlighting */
-        .selected {
-            font-weight: bold;
-            color: #f00; /* Red color for selected tab */
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -50,15 +30,14 @@
     <div class="container">
         <h2>Choropleth Map</h2>
         <p>Bigfoot Report Density by State</p>
-        <div id="map"></div> <!-- Map container -->
+        <div id="map" style="width: 100%; height: 500px;"></div>
     </div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
-    crossorigin="anonymous"></script>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <!-- Custom Map Logic -->
+    <!-- Custom Map Logic for Choropleth -->
     <script src="./visualization code/choro_layer_logic.js"></script>
 
     <script>
@@ -71,13 +50,14 @@
         } else if (currentURL.endsWith("choro_index.html")) {
             document.getElementById("choro-tab").classList.add("selected"); // Highlight Choropleth tab
         }
-    </script> 
+    </script>    
 
     <footer>
         <p>Explore our resources and dive into the mysteries of Bigfoot sightings.</p>
     </footer>
 </body>
 </html>
+
 
 
 
