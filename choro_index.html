@@ -41,18 +41,23 @@
     <script src="./visualization code/choro_layer_logic.js"></script>
 
     <script>
-        // Highlight the current tab based on the URL
+        // Get the current URL path
         const currentURL = window.location.pathname;
     
-        // Check for the root path (i.e., the main page of your website)
-        if (currentURL.endsWith("index.html") || currentURL === "/") {
+        // Remove "selected" class from all tabs first
+        document.querySelectorAll('nav a').forEach(tab => {
+            tab.classList.remove('selected');
+        });
+    
+        // Highlight the current tab based on the URL
+        if (currentURL.endsWith("index.html")) {
             document.getElementById("map-tab").classList.add("selected");
+        } else if (currentURL.endsWith("choro_index.html")) {
+            document.getElementById("choro-tab").classList.add("selected");
         } else if (currentURL.endsWith("dashboard.html")) {
             document.getElementById("dashboard-tab").classList.add("selected");
-        } else if (currentURL.endsWith("choro_index.html")) {
-            document.getElementById("choro-tab").classList.add("selected"); // Highlight Choropleth tab
         }
-    </script>    
+    </script>
 
     <footer>
         <p>Explore our resources and dive into the mysteries of Bigfoot sightings.</p>
