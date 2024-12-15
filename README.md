@@ -94,6 +94,14 @@ Rows with vague or missing date entries (e.g., "late 90s" or NaN) were dropped, 
 - **Text and Field Normalization:** Fields like report_number and report_class were transformed to extract consistent values, while columns like environment were standardized to lowercase for uniformity.
 
 Thanks to the meticulous structure of the Bigfoot database, no major outliers or invalid entries were present, and all rows included the required fields: year, state, county, and report number. This streamlined the cleaning process, allowing us to focus on deeper analysis and enrichment in subsequent steps.
+### Visualization & Map Creation
+We utilized Leaflet.js for the map framework and MarkerClusterGroup for handling the large number of markers. The map layers were created for different map types, such as StreetMap and OpenTopoMap, and users could interactively switch between these layers.
+
+To make the map even more intuitive, we used custom SVG icons for markers that represent different Bigfoot sighting classifications. The icons were created with dynamic colors and an overlay of an image of Bigfoot (sourced from The Noun Project), which was combined with an SVG oval background. The icons change color based on the classification (green for Class A, orange for Class B, and red for Class C).
+
+For the creation of these custom SVG icons, we used code adapted from the guide found on One Step Code. This allowed us to craft markers that visually communicate the classification of each sighting, improving the user experience.
+
+Each marker on the map is interactive: clicking a marker reveals the report number, classification, location, year, and a link to the original report on the BFRO website. The map also includes a legend that visually shows the relationship between marker colors and report classifications.
 ## Lessons Learned
 This project reinforced several key lessons about data collection and analysis:  
 - **The Value of Quality Data**: The Bigfoot database was well-maintained, which minimized the effort needed for cleaning and allowed us to focus on analysis.  
