@@ -6,13 +6,18 @@
     <title>Bigfoot Sightings Dashboard</title>
     <script src="https://d3js.org/d3.v7.min.js"></script> <!-- Include D3.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
-    <link rel="stylesheet" href="heather_css.css"> <!-- Link to your external CSS -->
+    <link rel="stylesheet" href="visualization code/css/dashboard_css.css"> <!-- Link to your external CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 <body>
     <h1>Bigfoot Sightings Report Dashboard</h1>
-
+    <nav>
+        <a href="./index.html" id="map-tab">Map</a>
+        <a href="./choro_index.html" id="choro-tab">Choropleth</a>
+        <a href="./dashboard.html" id="dashboard-tab">Dashboard</a>
+        <a href="https://www.bfro.net" target="_blank">BFRO</a>
+    </nav>
     <!-- Dropdowns for Filters -->
     <div>
         <label for="selTimeframe">Timeframe: </label>
@@ -62,13 +67,12 @@
         <table id="data-table" border="1">
             <colgroup>
                 <col style="width: 10%;"> <!-- Adjust width for the first column -->
-                <col style="width: 10%;"> <!-- Adjust width for the first column -->
-                <col style="width: 10%;"> <!-- Adjust width for the first column -->
-                <col style="width: 10%;"> <!-- Adjust width for the first column -->
-                <col style="width: 10%;"> <!-- Adjust width for the first column -->
-                <col style="width: 10%;"> <!-- Adjust width for the 'Location Details' column -->
-                <col style="width: 10%;"> <!-- Adjust width for the third column -->
-                <col style="width: 30%;"> <!-- Adjust width for the fourth column -->
+                <col style="width: 10%;"> 
+                <col style="width: 10%;"> 
+                <col style="width: 10%;"> 
+                <col style="width: 10%;"> 
+                <col style="width: 10%;"> 
+                <col style="width: 10%;">
             </colgroup>
             <thead>
                 <tr>
@@ -79,7 +83,6 @@
                     <th>Month</th>
                     <th>State</th>
                     <th>County</th>
-                    <th>Location Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,7 +91,7 @@
         </table>
     </div>
 
-    <script src="heather_js.js"></script> <!-- Link to your JavaScript file -->
+    <script src="visualization code/logic-files/dashboard.js"></script> <!-- Link to your JavaScript file -->
 
 </body>
 </html>

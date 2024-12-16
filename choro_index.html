@@ -38,26 +38,7 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <!-- Custom Map Logic for Choropleth -->
-    <script src="./visualization code/choro_layer_logic.js"></script>
-
-    <script>
-        // Get the current URL path
-        const currentURL = window.location.pathname;
-    
-        // Remove "selected" class from all tabs first
-        document.querySelectorAll('nav a').forEach(tab => {
-            tab.classList.remove('selected');
-        });
-    
-        // Highlight the current tab based on the URL
-        if (currentURL.endsWith("index.html")) {
-            document.getElementById("map-tab").classList.add("selected");
-        } else if (currentURL.endsWith("choro_index.html")) {
-            document.getElementById("choro-tab").classList.add("selected");
-        } else if (currentURL.endsWith("dashboard.html")) {
-            document.getElementById("dashboard-tab").classList.add("selected");
-        }
-    </script>
+    <script src="./visualization code/logic-files/choro_layer_logic.js"></script>
 
     <footer>
         <p>Explore our resources and dive into the mysteries of Bigfoot sightings.</p>

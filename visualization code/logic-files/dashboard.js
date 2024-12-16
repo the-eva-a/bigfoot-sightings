@@ -122,14 +122,18 @@ function updateDashboard() {
         filteredData.forEach(d => {
             const row = tableBody.append("tr");
     
-            row.append("td").text(d.report_number);
+            row.append("td")
+            .append("a") // Append anchor tag
+            .attr("href", `https://www.bfro.net/GDB/show_report.asp?id=${d.report_number}`) // Add dynamic link
+            .attr("target", "_blank") // Open link in a new tab
+            .text(d.report_number); // Display the report number as text
             row.append("td").text(d.report_class);
             row.append("td").text(d.year);
             row.append("td").text(d.season);
             row.append("td").text(d.month);
             row.append("td").text(d.state);
             row.append("td").text(d.county);
-            row.append("td").text(d.location_details);
+            
         });
 
         // Calculate season counts
