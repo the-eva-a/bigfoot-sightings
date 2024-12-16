@@ -11,12 +11,13 @@ Air B&Bigfoot combines reports from the oldest and only scientific Bigfoot resea
 ## What We've Made
 **Tech Used:**
 - **Languages:** Python, JavaScript  
-- **Libraries:** Pandas, Beautiful Soup, Flask, Leaflet.js  
+- **Libraries:** Pandas, Beautiful Soup, Flask, Leaflet.js, Chart.js
 
 **Features:**
 - **Interactive Map:** Explore Bigfoot sightings with filters for year and classification.  
 - **Data Transparency:** All report data is linked directly to the [Bigfoot Research Organization (BFRO)](https://www.bfro.net).  
 - **Dynamic Details:** Clickable markers reveal the report number, classification, location, year, and a link to the original report.
+- **Data Dashboard:** Filter and view report data within a specific timeframe or loaction, and see a snapshot of descriptive statistics about the reports
 - **Powerful API:** The included Flask API enables programmatic access to the dataset, allowing users to:
   - Retrieve all records or a subset of records based on parameters such as year, state, or classification.
   - Access detailed metadata for individual reports.
@@ -48,6 +49,15 @@ Features
 3. **Filter Sightings:** 
     - Use the filter options to narrow sightings by year or classification. 
     - Clear filters to return to the full dataset
+
+### Interactive Report Dashboard
+1. **Access the Dashboard:**
+
+     Visit the interactive dashboard at https://the-eva-a.github.io/bigfoot-sightings/dashboard.html
+2. **Explore report information:**
+    - Filter by timeframe and state, or leave either option unfiltered
+    - View counts of: overall sightings, sightings by class, sightings by season
+    - See a chart containing all of the relevant report details
 ---
 ### API Access
 To access the data programmatically, follow these steps:
