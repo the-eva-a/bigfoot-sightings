@@ -139,7 +139,7 @@ fetch('data/bigfoot_coordinates_clean_cols.json')
 
       // Add the year to the yearsAvailable set (for the year dropdown filter)
       if (year) {
-        yearsAvailable.add(year);  // Add year to the set of available years
+        yearsAvailable.add(String(year).trim());  // Add year to the set of available years
       }
     });
 
